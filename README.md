@@ -101,7 +101,7 @@ restoreConfig()
 
 默认配置列表，可以根据实际需求通过setConfig添加自己的配置，通过导入requestConfig进行访问
 
-```json
+```js
 {
     tokenName: 'token', //保存在浏览器的token
     responseTokenName: 'token', //后端返回的token
@@ -127,7 +127,7 @@ restoreConfig()
 
 ### 提供了错误码表，开发者可以根据实际进行修改添加
 
-```json
+```js
 'warning': {
       401: {
         text: '401警告',
