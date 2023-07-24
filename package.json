@@ -1,0 +1,15 @@
+{
+  "name": "se-axios",
+  "version": "1.0.0",
+  "description": "基于axios二次封装",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "se-axios"
+  ],
+  "author": "小陈学编程",
+  "license": "ISC",
+  "dependencies": {}
+}
