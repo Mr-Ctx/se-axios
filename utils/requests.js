@@ -1,7 +1,7 @@
 import axios from "./axios";
 import Message from '../element-ui/message';
 import MessageBox from '../element-ui/message-box';
-import errorCode from "./errorCode";
+import { errorCode } from "./errorCode";
 import { requestConfig } from "./requestConfig";
 import { tansParams } from './common';
 
@@ -9,7 +9,8 @@ class Request{
     instance
     constructor(my_config){
         this.instance = axios.create(my_config.requestConfig)
-        this.instance.interceptors.request.use(config => {
+        this.instance.interceptors.request.use(requestConfig.requestInterceptors ? requestConfig.requestInterceptors : config => {
+            my_config = config
              // get请求映射params参数
             if (config.method === 'get') {
                 if(config.params){
@@ -20,10 +21,8 @@ class Request{
                 }
             }
             //当浏览器存有token并且isToken为true时才使用token
-            console.log(localStorage.getItem(requestConfig.tokenName));
             if(localStorage.getItem(requestConfig.tokenName) !== null && requestConfig.isToken){
                 config.headers.Token =localStorage.getItem(requestConfig.tokenName)
-                my_config = config
             }
             if(requestConfig.isToken && localStorage.getItem(requestConfig.tokenName) === null){
                 MessageBox.confirm('未认证',
@@ -40,7 +39,8 @@ class Request{
             Promise.reject(error)
         })
 
-        this.instance.interceptors.response.use(res =>{
+        this.instance.interceptors.response.use(requestConfig.responseInterceptors ? requestConfig.responseInterceptors : res =>{
+            
             //当返回的响应头中有token并且isToken为true时才在浏览器存token
             if (res.headers[requestConfig.responseTokenName] && isToken) {
                 localStorage.setItem(requestConfig.tokenName, res.headers[requestConfig.responseTokenName]);
@@ -85,6 +85,8 @@ class Request{
     request(config){
         return this.instance.request(config).instance
     }
+
+    
 }
 
 export default Request

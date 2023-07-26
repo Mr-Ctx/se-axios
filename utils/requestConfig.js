@@ -20,6 +20,14 @@ var requestConfig = {
         acquiesce: (e) =>{
             Message({message: e, type: 'info'})
         },
+        // requestInterceptors: (config) =>{
+        //     console.log('reqConfig', config);
+        //     return config
+        // },
+        // responseInterceptors: (res) =>{
+        //     console.log('res', res.data);
+        //     return res.data
+        // }
 }
 
 function setConfig(e){

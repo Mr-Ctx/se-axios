@@ -2,6 +2,12 @@
 
 se-axios是一个基于axios进行二次封装的工具，开发者只需要使用提供的默认请求实例或者自定义请求实例即可发起请求，无需对请求参数以及响应数据进行拦截处理，se-axios已经帮开发者完成这部分工作
 
+## 安装
+
+```
+npm install se-axios
+```
+
 ## 特性
 
 ### 开发者只需要关注自己的项目请求方法
@@ -17,6 +23,24 @@ export function functionName(data){
 ```
 
 ### 提供了默认的请求拦截器，响应拦截器，满足大部分开发需求，开发者无需自己编写
+
+### 开发者不满足默认的请求拦截器和响应拦截器时，可通过配置requestInterceptors和responseInterceptors来自定义自己的拦截器
+
+```js
+{
+   requestInterceptors: (config) =>{
+        //....... 自己的请求拦截器逻辑
+        //最后一定要return config
+        return config
+    },
+    responseInterceptors:(res) =>{
+        //....... 自己的响应拦截器逻辑
+        return res.data
+    }
+}
+```
+
+
 
 ### 提供了默认的请求实例，用户可以通过导入service直接使用，默认请求实例的baseURL：http://localhost:8080/
 
@@ -101,7 +125,7 @@ restoreConfig()
 
 默认配置列表，可以根据实际需求通过setConfig添加自己的配置，通过导入requestConfig进行访问
 
-```js
+```json
 {
     tokenName: 'token', //保存在浏览器的token
     responseTokenName: 'token', //后端返回的token
@@ -127,7 +151,7 @@ restoreConfig()
 
 ### 提供了错误码表，开发者可以根据实际进行修改添加
 
-```js
+```json
 'warning': {
       401: {
         text: '401警告',
