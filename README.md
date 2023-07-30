@@ -1,7 +1,7 @@
 # se-axios
 
 se-axios是一个基于axios进行二次封装的工具，开发者只需要使用提供的默认请求实例或者自定义请求实例即可发起请求，无需对请求参数以及响应数据进行拦截处理，se-axios已经帮开发者完成这部分工作
-
+**由于se-axios提供的拦截器使用了element-ui的组件，所以se-axios内置了element-ui，暂不支持非vue2项目使用**
 ## 安装
 
 ```
@@ -224,4 +224,31 @@ restoreConfig()
    }
    ```
 
+
+## 版本更新
+
+### 2023.7.30更新
+
+1. 新增请求白名单，在启用token时，可以通过配置请求白名单，定义不需要验证token的请求,，如若不配置则默认‘login’，’/login’请求不验证token
+
+2. 配置使用数组方式
+
+3. 配置的url规则**aa/bb**形式前后不要添加 **’/‘** ，且要与请求实例中的url保持一致
+
+   ```
+   示例：
+   当url = '/aaa/bbb/' 或 'ccc/ddd/'时
+   配置白名单中的url需改成：excludePath:['aaa/bbb', 'ccc/ddd']
+   ```
+
    
+
+**使用方法**
+
+```js
+setConfig({
+    isToken: true, //启用token时
+    excludePath:['api/login', 'api/testput']
+})
+```
+

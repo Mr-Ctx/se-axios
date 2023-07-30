@@ -1,5 +1,5 @@
 import Request from "./requests";
-import Message from '../element-ui/message';
+import Message from '../my-element-ui/message';
 export const service = new Request({
     requestConfig:{
         baseURL: 'http://localhost:8080/',

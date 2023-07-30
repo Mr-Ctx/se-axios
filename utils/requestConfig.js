@@ -1,10 +1,11 @@
-import Message from '../element-ui/message'
+import Message from '../my-element-ui/message'
 
 var requestConfig = {
         tokenName: 'token',
         responseTokenName: 'token',
         index: '/login',
         isToken: true,
+        excludePath: ['/login', 'login'],
         headers:{
             'Content-Type': 'application/json;charset=utf-8'
         },

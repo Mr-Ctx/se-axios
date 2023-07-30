@@ -1,9 +1,9 @@
 import axios from "./axios";
-import Message from '../element-ui/message';
-import MessageBox from '../element-ui/message-box';
+import Message from '../my-element-ui/message';
+import MessageBox from '../my-element-ui/message-box';
 import { errorCode } from "./errorCode";
 import { requestConfig } from "./requestConfig";
-import { tansParams } from './common';
+import { tansParams, urlMatch } from './common';
 
 class Request{
     instance
@@ -25,14 +25,17 @@ class Request{
                 config.headers.Token =localStorage.getItem(requestConfig.tokenName)
             }
             if(requestConfig.isToken && localStorage.getItem(requestConfig.tokenName) === null){
-                MessageBox.confirm('未认证',
-                    '系统提示', {
-                    confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        type: 'warning' }).then(() => {
-                        location.href = requestConfig.index;
-                }).catch(() => {
-                });
+                //开启token校验时，匹配请求白名单
+                if(!urlMatch(requestConfig.excludePath, config.url)){
+                     MessageBox.confirm('未认证',
+                        '系统提示', {
+                        confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning' }).then(() => {
+                            location.href = requestConfig.index;
+                        }).catch(() => {
+                    });
+                }
             }
             return config
         },error => {
@@ -42,7 +45,7 @@ class Request{
         this.instance.interceptors.response.use(requestConfig.responseInterceptors ? requestConfig.responseInterceptors : res =>{
             
             //当返回的响应头中有token并且isToken为true时才在浏览器存token
-            if (res.headers[requestConfig.responseTokenName] && isToken) {
+            if (res.headers[requestConfig.responseTokenName] && requestConfig.isToken) {
                 localStorage.setItem(requestConfig.tokenName, res.headers[requestConfig.responseTokenName]);
             }
             // 未设置状态码则默认成功状态

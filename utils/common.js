@@ -1,11 +1,11 @@
 
-
 /**
  * 通用js方法封装处理
- * Copyright (c) 2019 ruoyi
  */
 
-// 日期格式化
+/** 
+ * 日期格式化
+ * */ 
 export function parseTime(time, pattern) {
   if (arguments.length === 0 || !time) {
     return null
@@ -46,14 +46,18 @@ export function parseTime(time, pattern) {
   return time_str
 }
 
-// 表单重置
+/**
+ * 表单重置
+ * */
 export function resetForm(refName) {
   if (this.$refs[refName]) {
     this.$refs[refName].resetFields();
   }
 }
 
-// 添加日期范围
+/**
+ * 添加日期范围
+ **/
 export function addDateRange(params, dateRange, propName) {
   let search = params;
   search.params = typeof (search.params) === 'object' && search.params !== null && !Array.isArray(search.params) ? search.params : {};
@@ -68,7 +72,9 @@ export function addDateRange(params, dateRange, propName) {
   return search;
 }
 
-// 回显数据字典
+/**
+*回显数据字典
+*/
 export function selectDictLabel(datas, value) {
   if (value === undefined) {
     return "";
@@ -86,7 +92,8 @@ export function selectDictLabel(datas, value) {
   return actions.join('');
 }
 
-// 回显数据字典（字符串、数组）
+/**
+ * 回显数据字典（字符串、数组）*/
 export function selectDictLabels(datas, value, separator) {
   if (value === undefined || value.length ===0) {
     return "";
@@ -112,7 +119,9 @@ export function selectDictLabels(datas, value, separator) {
   return actions.join('').substring(0, actions.join('').length - 1);
 }
 
-// 字符串格式化(%s )
+/**
+ * 字符串格式化(%s )
+ * */
 export function sprintf(str) {
   var args = arguments, flag = true, i = 1;
   str = str.replace(/%s/g, function () {
@@ -126,7 +135,9 @@ export function sprintf(str) {
   return flag ? str : '';
 }
 
-// 转换字符串，undefined,null等转化为""
+/**
+ * 转换字符串，undefined,null等转化为""
+ * */
 export function parseStrEmpty(str) {
   if (!str || str == "undefined" || str == "null") {
     return "";
@@ -134,7 +145,9 @@ export function parseStrEmpty(str) {
   return str;
 }
 
-// 数据合并
+/**
+ * 数据合并
+ * */
 export function mergeRecursive(source, target) {
   for (var p in target) {
     try {
@@ -227,7 +240,29 @@ export function tansParams(params) {
   return result
 }
 
-// 验证是否为blob格式
+/**
+ * 验证是否为blob格式
+ * */
 export function blobValidate(data) {
   return data.type !== 'application/json'
+}
+/**
+ * 请求url白名单匹配
+ * @param {*} pattern 白名单数组 
+ * @param {*} url 请求url
+ * @returns 匹配结果
+ */
+export function urlMatch(pattern, url){
+  if(url.substr(0, 1) === '/'){
+    url = url.substr(1, url.length)
+  }
+  for(let i of pattern){
+    if(i === url){
+      return true
+    }
+    if(i === url.substr(0, url.lastIndexOf('/'))){
+      return true
+    }
+  }
+  return false
 }

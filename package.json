@@ -1,15 +1,26 @@
 {
   "name": "se-axios",
-  "version": "1.0.0",
+  "version": "1.1.3",
   "description": "基于axios二次封装",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vue-cli-service build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-Ctx/se-axios.git"
   },
   "keywords": [
-    "se-axios"
+    "se-axios",
+    "axios"
   ],
-  "author": "小陈学编程",
+  "author": "Mr_Ctx",
   "license": "ISC",
-  "dependencies": {}
+  "bugs": {
+    "url": "https://github.com/Mr-Ctx/se-axios/issues"
+  },
+  "dependencies": {
+    "element-ui": "^2.15.13"
+  }
 }

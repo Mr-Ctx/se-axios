@@ -11,5 +11,5 @@ export {
     Request,
     service,
     setConfig,
-    restoreConfig
+    restoreConfig,
 }
