@@ -10,6 +10,7 @@ class Request{
     constructor(my_config){
         this.instance = axios.create(my_config.requestConfig)
         this.instance.interceptors.request.use(requestConfig.requestInterceptors ? requestConfig.requestInterceptors : config => {
+            // config.headers = config.headers ? config.headers : {'Content-Type': 'application/json;charset=utf-8'}
             my_config = config
              // get请求映射params参数
             if (config.method === 'get') {
@@ -61,6 +62,9 @@ class Request{
                 my_config.exception ? my_config.exception(msg) :
                 requestConfig.exception(msg)
                 return Promise.reject(msg)
+            }
+            else if(code === 201){
+                return res.data
             }
             else if (code !== 200) {
                 const msg = res.data.msg ? res.data.msg : errorCode.acquiesce.text

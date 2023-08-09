@@ -6,6 +6,8 @@ var requestConfig = {
         index: '/login',
         isToken: true,
         excludePath: ['/login', 'login'],
+        sliceSize: 2, //切片大小 单位MB
+        fileSize: 10, //使用切片上传的文件大小
         headers:{
             'Content-Type': 'application/json;charset=utf-8'
         },
